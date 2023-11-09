@@ -42,14 +42,13 @@ class NEODatabase:
         self._neos = neos
         self._approaches = approaches
 
-        # TODO: What additional auxiliary data structures will be useful?
         self.neo_dest_map = {}
         self.neo_name_map = {}
         for neo in self._neos:
             self.neo_dest_map[neo.designation] = neo
             self.neo_name_map[neo.name] = neo
 
-        # TODO: Link together the NEOs and their close approaches.
+        # Link together the NEOs and their close approaches.
         for approach in self._approaches:
             if self.neo_dest_map[approach._designation] is not None:
                 approach.neo = self.neo_dest_map[approach._designation]
@@ -69,7 +68,7 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-        # TODO: Fetch an NEO by its primary designation.
+        # Fetch an NEO by its primary designation.
         if designation in self.neo_dest_map.keys() and self.neo_dest_map[designation] is not None:
             return self.neo_dest_map[designation]
         return None
@@ -88,7 +87,7 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-        # TODO: Fetch an NEO by its name.
+        # Fetch an NEO by its name.
         if name in self.neo_name_map.keys() and self.neo_name_map[name] is not None:
             return self.neo_name_map[name]
         return None
@@ -107,11 +106,7 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        # TODO: Generate `CloseApproach` objects that match all of the filters.
-        
-        #<class 'filters.DateFilter'>
-        #<class 'tuple'>
-
+        # Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
             filtered = True
             for filter in filters:

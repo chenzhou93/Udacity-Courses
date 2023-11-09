@@ -39,6 +39,7 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
+
     def __init__(self, op, value):
         """Construct a new `AttributeFilter` from an binary predicate and a reference value.
 
@@ -70,31 +71,47 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """From Udacity."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 class DateFilter(AttributeFilter):
+    """Created for filtering Date field."""
+
     @classmethod
     def get(cls, approach):
+        """Get Time and convert to date."""
         return approach.time.date()
 
 class DistanceFilter(AttributeFilter):
+    """Created for filtering Distance field."""
+
     @classmethod
     def get(cls, approach):
+        """Get an approache's distance."""
         return approach.distance
     
 class VelocityFilter(AttributeFilter):
+    """Created for filtering Velocity field."""
+    
     @classmethod
     def get(cls, approach):
+        """Get an approache's velocity."""
         return approach.velocity
     
 class DiameterFilter(AttributeFilter):
+    """Created for filtering Neo's Diameter field."""
+
     @classmethod
     def get(cls, approach):
+        """Get the related Neo's Diameter."""
         return approach.neo.diameter
 
 class HazardousFilter(AttributeFilter):
+    """Created for filtering Neo's hazardous field."""
+
     @classmethod
     def get(cls, approach):
+        """Get the related Neo's hazardous."""
         return approach.neo.hazardous
 
 def create_filters(
@@ -133,7 +150,7 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-    # TODO: Decide how you will represent your filters.
+    # Decide how you will represent your filters.
     filters = []
     if date is not None:
         filters.append(DateFilter(operator.eq, date))
@@ -173,7 +190,7 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    # TODO: Produce at most `n` values from the given iterator.
+    # Produce at most `n` values from the given iterator.
     if n != 0:
         return itertools.islice(iterator, 0, n)
     else:
